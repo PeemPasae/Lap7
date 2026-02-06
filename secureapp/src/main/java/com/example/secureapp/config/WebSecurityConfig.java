@@ -1,4 +1,4 @@
-package com.example.config;
+package com.example.secureapp.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -16,14 +16,14 @@ public class WebSecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
             .authorizeHttpRequests((requests) -> requests
-                // อนุญาตให้เข้าหน้า register และ login โดยไม่ต้องล็อกอิน
+                // *** จุดสำคัญ: อนุญาตให้เข้าหน้า /register และ /login ได้โดยไม่ต้องล็อกอิน ***
                 .requestMatchers("/register", "/login", "/css/**", "/js/**").permitAll()
-                // หน้าอื่นๆ ต้องล็อกอินก่อน
+                // หน้าอื่นๆ (เช่น /greet) ต้องล็อกอินก่อนถึงจะเข้าได้
                 .anyRequest().authenticated()
             )
             .formLogin((form) -> form
-                .loginPage("/login") // กำหนด URL หน้า Login ของเราเอง
-                .defaultSuccessUrl("/greet", true) // ล็อกอินสำเร็จไปหน้า greet
+                .loginPage("/login") // บอก Spring ว่าเรามีหน้า Login ที่ทำเองอยู่ที่ path นี้
+                .defaultSuccessUrl("/greet", true) // ล็อกอินสำเร็จ ให้เด้งไปหน้า /greet เสมอ
                 .permitAll()
             )
             .logout((logout) -> logout
@@ -35,6 +35,7 @@ public class WebSecurityConfig {
 
     @Bean
     public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder(); // ใช้การเข้ารหัสแบบ BCrypt
+        // ใช้การเข้ารหัสรหัสผ่านแบบ BCrypt (มาตรฐาน)
+        return new BCryptPasswordEncoder();
     }
 }

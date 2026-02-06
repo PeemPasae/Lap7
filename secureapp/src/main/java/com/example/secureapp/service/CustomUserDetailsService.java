@@ -1,4 +1,4 @@
-package com.example.service;
+package com.example.secureapp.service;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -9,7 +9,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import com.example.model.User;
+import com.example.secureapp.model.User;
 
 @Service
 public class CustomUserDetailsService implements UserDetailsService {

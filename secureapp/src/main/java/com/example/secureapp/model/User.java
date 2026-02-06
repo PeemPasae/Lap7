@@ -1,4 +1,4 @@
-package com.example.model;
+package com.example.secureapp.model;
 
 public class User {
     private String username;

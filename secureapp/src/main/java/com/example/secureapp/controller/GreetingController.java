@@ -1,4 +1,4 @@
-package com.example.controller;
+package com.example.secureapp.controller;
 
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
@@ -7,8 +7,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import com.example.model.User;
-import com.example.service.CustomUserDetailsService;
+import com.example.secureapp.model.User;
+import com.example.secureapp.service.CustomUserDetailsService;
 
 @Controller
 public class GreetingController {
