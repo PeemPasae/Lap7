@@ -42,8 +42,15 @@ public class GreetingController {
     // หน้า Greet (เข้าได้เฉพาะตอนล็อกอินแล้ว)
     @GetMapping("/greet")
     public String greet(Authentication authentication, Model model) {
-        // ดึงชื่อ User ที่ล็อกอินอยู่มาแสดง
-        model.addAttribute("username", authentication.getName());
+        // ดึงชื่อ User ที่ล็อกอินอยู่
+        String username = authentication.getName();
+        
+        // ดึงข้อมูล User ตัวเต็มมาจาก Service (ที่แก้ตะกี้)
+        User user = userDetailsService.getUser(username);
+        
+        // ส่งไปที่หน้าเว็บ
+        model.addAttribute("user", user);
+        
         return "greet";
     }
 }
